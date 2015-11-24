@@ -67,9 +67,7 @@ class Seen
 module.exports = (robot) ->
   seen = new Seen robot
 
-  # Keep track of last msg heard
-  robot.hear /.*/, (msg) ->
-    unless is_pm msg
+  robot.enter (msg) ->
       seen.add (ircname msg), (ircchan msg)
 
   robot.respond /seen @?([-\w.\\^|{}`\[\]]+):? ?(.*)/, (msg) ->
