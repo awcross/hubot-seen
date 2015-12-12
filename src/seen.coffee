@@ -51,8 +51,7 @@ class Seen
 
   add: (user) ->
     @robot.logger.debug "seen.add #{clean user}"
-    @cache[clean user] =
-      date: new Date() - 0
+    @cache[clean user].date = new Date() - 0
 
   last: (user) ->
     @cache[clean user] ? {}
