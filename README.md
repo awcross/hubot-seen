@@ -1,6 +1,6 @@
 # hubot-seen
 
-A hubot script that tracks when/where users were last seen
+A hubot script that tracks when users were last seen
 
 See [`src/seen.coffee`](src/seen.coffee) for full documentation.
 
