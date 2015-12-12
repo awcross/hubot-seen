@@ -49,10 +49,9 @@ class Seen
     else
       @robot.brain.data.seen = @cache
 
-  add: (user, channel) ->
-    @robot.logger.debug "seen.add #{clean user} on #{channel}"
+  add: (user) ->
+    @robot.logger.debug "seen.add #{clean user}"
     @cache[clean user] =
-      chan:channel
       date: new Date() - 0
 
   last: (user) ->
@@ -68,7 +67,7 @@ module.exports = (robot) ->
   seen = new Seen robot
 
   robot.enter (msg) ->
-      seen.add (ircname msg), (ircchan msg)
+      seen.add (ircname msg)
 
   robot.respond /seen @?([-\w.\\^|{}`\[\]]+):? ?(.*)/, (msg) ->
     if msg.match[1] == "in" and msg.match[2] == "last 24h"
@@ -85,7 +84,7 @@ module.exports = (robot) ->
         else
           "at #{new Date(last.date)}"
 
-        msg.send "#{nick} was last seen in #{last.chan} #{date_string}"
+        msg.send "#{nick} was last seen #{date_string}"
 
       else
         msg.send "I haven't seen #{nick} around lately"
